@@ -1,0 +1,61 @@
+max_social_security_income_per_month = 4819.00
+
+current_salary = int(input(("What is your current salary per year? ")))
+print("")
+salary_per_month = current_salary / 12
+print(f"Your monthly salary is ${salary_per_month:,.2f}")
+print("")
+retirement_age = int(input("What age do you want to retire? "))
+print("")
+life_expectancy = int(input("what age do you expect to die? "))
+print("")
+
+current_age = 31
+current_year = 2023
+time_to_retirement = (retirement_age- current_age)
+retirement_year = time_to_retirement + current_year
+time_to_death = life_expectancy - retirement_age
+print("You will retire in  {}, which is {} years from now. You will be retired for a total of {} years".format(retirement_year, time_to_retirement, time_to_death))
+print("")
+
+print("Your expected SS by age is: "
+      "\n"
+      "\n55 = $2,726"
+      "\n"
+      "\n62 = $2,735 a month in SS"
+      "\n"
+      "\n65 = $3,390 a month in SS"
+      "\n"
+      "\n70 = 4,820 a month")
+print("")
+
+ss_per_month = int(input("How much social security will you receive a month? "))
+print("")
+retirement_account_current_balance =  int(input("what is your current 401k balance? "))
+print("")
+
+#here I will caluclate the 401k balance at retirement
+rate_of_return = float(input("What is your expected rate of return? "))
+years_to_retirement = retirement_age - current_age
+contribution_to_retirement_account_per_year = 22500 + 102500
+total_contributions = contribution_to_retirement_account_per_year * years_to_retirement
+print("")
+def calculate_401k(retirement_account_current_balance, contribution_to_retirement_account_per_year, years_to_retirement, rate_of_return):
+    total_contributions = contribution_to_retirement_account_per_year * years_to_retirement
+    total_earnings = retirement_account_current_balance * (1 + rate_of_return) ** years_to_retirement - retirement_account_current_balance
+    future_balance = retirement_account_current_balance + total_contributions + total_earnings
+    balance_per_year = (future_balance / time_to_death)
+    balance_per_month_401k = balance_per_year / 12
+    balance_per_month = balance_per_month_401k + ss_per_month
+    total_balance_per_year = balance_per_month * 12
+    diff_salary =  balance_per_month - salary_per_month
+    print(f"Future 401(k) balance: ${future_balance:,.2f}")
+    print("")
+    print(f"you will have ${balance_per_month_401k:,.2f} per month and ${balance_per_year:,.2f} annually from your 401k alone")
+    print("")
+    print(f"You will have ${balance_per_month:,.2f} per month and ${total_balance_per_year:,.2f} annually from your 401k and social security")
+
+
+calculate_401k(retirement_account_current_balance, contribution_to_retirement_account_per_year, years_to_retirement, rate_of_return)
+
+
